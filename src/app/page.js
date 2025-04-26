@@ -2,10 +2,31 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import thumbnail from "../../public/images/thumbnail.png";
-import { FiWifi, FiPhone, FiMapPin, FiInfo, FiSettings } from "react-icons/fi";
-import { MdPool, MdFreeBreakfast } from "react-icons/md";
+import skyline1 from "../../public/images/Skyline-Suite1.jpg";
+import skyline2 from "../../public/images/skyline-suite2.jpg";
+import skyline3 from "../../public/images/skyline-suite3.jpg";
+import cozyCabin1 from "../../public/images/Cozy-Cabin1.png";
+import cozyCabin2 from "../../public/images/cozy-cabin2.jpg";
+import cozyCabin3 from "../../public/images/cozy-cabin3.jpeg";
+import cozyCabin4 from "../../public/images/cozy-cabin4.jpg";
+import gardenView1 from "../../public/images/garden-view1.jpg";
+import gardenView2 from "../../public/images/garden-view2.jpg";
+import gardenView3 from "../../public/images/garden-view3.png";
+import sunset1 from "../../public/images/sunset-suit1.jpg";
+import sunset2 from "../../public/images/sunset-suit2.jpg";
+
+import { FiWifi } from "react-icons/fi";
+import { MdPool, MdFreeBreakfast, MdDinnerDining, MdNaturePeople, MdEco, MdLocationOn } from "react-icons/md";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaParking, FaConciergeBell, FaHandsHelping, FaTag } from "react-icons/fa"
+import { useState } from "react";
+
 
 export default function Home() {
+
+  const [activeTab, setActiveTab] = useState("all");
+  
+
   const facilities = [
     {
       name: "Free Wi-Fi",
@@ -20,27 +41,160 @@ export default function Home() {
       icon: <MdFreeBreakfast size={30} className="text-primary mb-2" />,
     },
     {
-      name: "Contact Us",
-      icon: <FiPhone size={30} className="text-primary mb-2" />,
+      name: "Dinner",
+      icon: <MdDinnerDining size={30} className="text-primary mb-2" />,
     },
     {
-      name: "About Us",
-      icon: <FiInfo size={30} className="text-primary mb-2" />,
+      name: "24/7 Service",
+      icon: <FaConciergeBell size={30} className="text-primary mb-2" />,
     },
     {
-      name: "Services",
-      icon: <FiSettings size={30} className="text-primary mb-2" />,
+      name: "Car Parking",
+      icon: <FaParking size={30} className="text-primary mb-2" />,
     },
     {
-      name: "Location",
-      icon: <FiMapPin size={30} className="text-primary mb-2" />,
+      name: "Nature View",
+      icon: <MdNaturePeople size={30} className="text-primary mb-2" />,
     },
   ];
+  
+
+  const roomType = [
+    {
+      name: "Luxury Cozy Cabin",
+      img: cozyCabin1,
+      type: "cozy",
+      bed: "Compact King Bed with Forest View Balcony",
+      availability: 2,
+      price: "50,500 LKR",
+      description: "A luxurious escape nestled in the forest, featuring a balcony with breathtaking views."
+    },
+    {
+      name: "Serene Cozy Cabin",
+      img: cozyCabin2,
+      type: "cozy",
+      bed: "Queen Bed with Indoor Fireplace",
+      availability: 2,
+      price: "48,900 LKR",
+      description: "Enjoy peaceful moments by the fire in this cozy cabin ideal for romantic getaways."
+    },
+    {
+      name: "Panoromic Cozy Cabin",
+      img: cozyCabin3,
+      type: "cozy",
+      bed: "King Bed with Skylight Roof",
+      availability: 3,
+      price: "30,000 LKR",
+      description: "Fall asleep under the stars with skylight views from the comfort of your king bed."
+    },
+    {
+      name: "Elegant Cozy Cabin",
+      img: cozyCabin4,
+      type: "cozy",
+      bed: "Luxury Queen Bed with Garden Patio",
+      availability: 5,
+      price: "29,000 LKR",
+      description: "Step into elegance with a private garden patio perfect for relaxation and morning coffee."
+    },
+    {
+      name: "Luxury Garden View",
+      img: gardenView1,
+      type: "garden",
+      bed: "Spacious King Bed with Private Garden Access",
+      availability: 3,
+      price: "35,000 LKR",
+      description: "Wake up to lush green scenery and unwind in your own private garden area."
+    },
+    {
+      name: "Serene Garden View",
+      img: gardenView2,
+      type: "garden",
+      bed: "Deluxe Double Bed with Nature View",
+      availability: 4,
+      price: "31,000 LKR",
+      description: "Surround yourself with nature in this serene garden-view room built for comfort."
+    },
+    {
+      name: "Panoromic Garden View",
+      img: gardenView3,
+      type: "garden",
+      bed: "Panoramic Queen Bed Facing Greenery",
+      availability: 3,
+      price: "33,500 LKR",
+      description: "Immerse in panoramic garden views with modern decor and a peaceful atmosphere."
+    },
+    {
+      name: "Luxury Skyline Suite",
+      img: skyline1,
+      type: "skyline",
+      bed: "King Bed with Rooftop City View",
+      availability: 2,
+      price: "45,000 LKR",
+      description: "An upscale suite with dazzling rooftop views of the city skyline by day and night."
+    },
+    {
+      name: "Serene Skyline Suite",
+      img: skyline2,
+      type: "skyline",
+      bed: "Queen Bed with Private Terrace",
+      availability: 2,
+      price: "42,000 LKR",
+      description: "Unwind on your private terrace while taking in the serene skyline ambiance."
+    },
+    {
+      name: "Panoromic Skyline Suite",
+      img: skyline3,
+      type: "skyline",
+      bed: "Skyview Double Bed with Modern Decor",
+      availability: 3,
+      price: "36,500 LKR",
+      description: "Stylish and spacious, offering wide skyline views and contemporary elegance."
+    },
+    {
+      name: "Serene Sunset",
+      img: sunset1,
+      type: "sunset",
+      bed: "Double Bed with Sunset-Facing Balcony",
+      availability: 2,
+      price: "48,000 LKR",
+      description: "Perfect for sunset lovers, this room features an open balcony with golden hour views."
+    },
+    {
+      name: "Panoromic Sunset",
+      img: sunset2,
+      type: "sunset",
+      bed: "Premium King Bed with Sea View",
+      availability: 2,
+      price: "59,500 LKR",
+      description: "Indulge in panoramic sea views and soothing sunsets from your luxurious suite."
+    }
+  ];
+  
+  
+
+  const filteredRooms = activeTab === "all" ? roomType : roomType.filter(room => room.type === activeTab);
+
+  const tabs = [
+    { label: "All", value: "all" },
+    { label: "Skyline Suite", value: "skyline" },
+    { label: "Sunset Villa", value: "sunset" },
+    { label: "Garden View", value: "garden" },
+    { label: "Cozy Cabin", value: "cozy" },
+  ];
+  
+  const features = [
+    { title: "Eco-friendly stay", bg: "bg-primary/20", icon: <MdEco size={28} className="text-secondary/40" /> },
+    { title: "Personalized services", bg: "bg-primary/30", icon: <FaHandsHelping size={28} className="text-secondary/50" /> },
+    { title: "Best price guarantee", bg: "bg-primary/40", icon: <FaTag size={28} className="text-secondary/65" /> },
+    { title: "Prime location", bg: "bg-primary/50", icon: <MdLocationOn size={28} className="text-secondary/80" /> },
+  ];
+  
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
+
       {/* Hero Section */}
-      <div className="relative w-full h-[60vh] md:h-[80vh]">
+      <div className="relative w-full h-[60vh] md:h-[80vh] sm:h-[70vh] min-h-[400px]">
         <Image
           src={thumbnail}
           alt="Hero"
@@ -56,17 +210,16 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-white text-2xl md:text-4xl font-semibold text-center"
+            className="text-white text-xl sm:text-2xl md:text-4xl font-semibold text-center px-4"
           >
             Discover comfort and relaxation at Holi Stay
           </motion.h1>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center gap-2 mt-12 w-full max-w-xl" >
+            className="flex items-center gap-2 mt-12 w-full max-w-xl p-3" >
             <input type="text" placeholder="Search for a room"
-              className="w-full p-2 rounded-full bg-white/50 text-black outline-none
-               hover:bg-white/70 focus:bg-white focus:ring-2 focus:ring-primary focus:ring-offset-2
-               transition-all duration-300" />
+              className="w-full p-2 rounded-full bg-white/50 text-black outline-none hover:bg-white/70 focus:bg-white 
+              focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-300 text-sm md:text-base" />
 
             <button className="bg-primary text-white px-5 py-2 rounded-full cursor-pointer hover:bg-primary/70 hover:scale-107 hover:shadow-xl transition-all duration-300">
               Explore
@@ -76,7 +229,7 @@ export default function Home() {
 
           {/* Small heading */}
           <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-white text-md mt-12 text-center" >
+            className="text-white text-sm sm:text-base mt-8 text-center px-2" >
             Book your stay with us and enjoy a comfortable and relaxing experience.
           </motion.h2>
         </div>
@@ -103,11 +256,12 @@ export default function Home() {
         }}
       >
         {/* mapped facilities */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+
           {facilities.map((facility, index) => (
             <motion.div
               key={index} whileHover={{ scale: 1.05, y: -5 }} transition={{ type: "spring", stiffness: 300 }}
-              className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center 
+              className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center justify-center 
               text-center cursor-pointer" >
               <motion.div whileHover={{ rotateY: 180 }} transition={{ duration: 0.6 }} className="mb-2" >
                 {facility.icon}
@@ -117,6 +271,93 @@ export default function Home() {
           ))}
         </div>
       </motion.div>
+
+
+      {/* Room Type */}
+      <div className="m-5 mt-12 p-3">
+        <div className="my-6">
+          <h1 className=" text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-3 mb-8 flex-wrap">
+          {tabs.map(tab => (
+            <button
+              key={tab.value}
+              onClick={() => setActiveTab(tab.value)}
+              className={`px-4 py-2 rounded-full font-medium transition-all ${
+                activeTab === tab.value
+                  ? "bg-primary text-white scale-105 shadow-lg"
+                  : "bg-gray-100 text-gray-800 hover:bg-primary/20"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Rooms */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {filteredRooms.map((room, index) => (
+            <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: index * 0.1 }}
+            className="relative group bg-secondary/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          >
+            <div className="relative w-full h-64 overflow-hidden">
+              <Image
+                src={room.img}
+                alt={room.name}
+                fill
+                className="object-cover transition-all duration-500 group-hover:blur-sm"
+              />
+          
+              {/* Overlay content */}
+              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-4 text-center">
+                <p className="text-sm mb-2">{room.bed}</p>
+                <p className="text-sm mb-2">Available: {room.availability} rooms</p>
+                <p className="text-lg font-bold">{room.price} / night</p>
+              </div>
+            </div>
+          
+            <div className="p-4">
+              <h2 className="text-lg font-semibold text-gray-800">{room.name}</h2>
+            </div>
+          </motion.div>
+          
+          ))}
+        </motion.div>
+
+      </div>
+
+
+      <section className="max-w-4xl mx-auto py-12">
+        <h2 className="text-4xl font-bold mb-8 text-center text-primary">Why Choose HoliStay?</h2>
+
+        <div className="flex flex-col gap-6">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              className="p-3 lg:w-full"
+              style={{ marginLeft: `${(index + 1) * 10}px` }}
+              whileHover={{ scaleX: 0.95 }} // Shrink on hover
+              transition={{ type: "spring", stiffness: 200 }} //  Smooth transition
+            >
+              <div className={`${feature.bg} p-6 rounded-full shadow-md flex items-center gap-4`}>
+                {feature.icon}
+                <h3 className="text-xl font-semibold">{feature.title}</h3>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+
     </div>    
   );
 }
