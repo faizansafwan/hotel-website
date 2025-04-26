@@ -339,11 +339,11 @@ export default function Home() {
       <section className="max-w-4xl mx-auto py-12">
         <h2 className="text-4xl font-bold mb-8 text-center text-primary">Why Choose HoliStay?</h2>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="p-3 lg:w-full"
+              className="m-4 lg:w-full"
               style={{ marginLeft: `${(index + 1) * 10}px` }}
               whileHover={{ scaleX: 0.95 }} // Shrink on hover
               transition={{ type: "spring", stiffness: 200 }} //  Smooth transition
