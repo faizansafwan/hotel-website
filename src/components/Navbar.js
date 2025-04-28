@@ -29,7 +29,7 @@ export default function Navbar() {
             <Link href="/about" className={`px-3 py-2 ${pathname === "/about" ? "text-secondary/80 font-bold" : ""}`}>About</Link>
             <Link href="/services" className={`px-3 py-2 ${pathname === "/services" ? "text-secondary/80 font-bold" : ""}`}>Services</Link>
             <Link href="/contact" className={`px-3 py-2 ${pathname === "/contact" ? "text-secondary/80 font-bold" : ""}`}>Contact</Link>
-            <Link href="/booking" className="bg-primary text-white px-3 py-2 rounded-md hover:bg-primary/90 transition">
+            <Link href="/booking" className="bg-primary text-white px-3 py-2 rounded-md hover:bg-secondary transition duration-300">
               Book Now
             </Link>
           </div>
