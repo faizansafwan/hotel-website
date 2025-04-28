@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import thumbnail from "../../public/images/thumbnail.png";
 import skyline1 from "../../public/images/Skyline-Suite1.jpg";
 import skyline2 from "../../public/images/skyline-suite2.jpg";
@@ -15,7 +15,7 @@ import gardenView3 from "../../public/images/garden-view3.png";
 import sunset1 from "../../public/images/sunset-suit1.jpg";
 import sunset2 from "../../public/images/sunset-suit2.jpg";
 
-import { FiWifi } from "react-icons/fi";
+import { FiWifi, FiX } from "react-icons/fi";
 import { MdPool, MdFreeBreakfast, MdDinnerDining, MdNaturePeople, MdEco, MdLocationOn } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaParking, FaConciergeBell, FaHandsHelping, FaTag } from "react-icons/fa"
@@ -25,6 +25,19 @@ import { useState } from "react";
 export default function Home() {
 
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (room) => {
+    setSelectedRoom(room);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+  };
   
 
   const facilities = [
@@ -273,80 +286,205 @@ export default function Home() {
       </motion.div>
 
 
-      {/* Room Type */}
-      <div className="m-5 mt-12 p-3">
-        <div className="my-6">
-          <h1 className=" text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
-        </div>
+      {/* Room Type Section */}
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0, y: 50 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.6,
+              ease: "easeOut"
+            }
+          }
+        }}
+        className="m-5 mt-12 p-3"
+      >
 
-        {/* Tabs */}
-        <div className="flex gap-3 mb-8 flex-wrap">
-          {tabs.map(tab => (
-            <button
-              key={tab.value}
-              onClick={() => setActiveTab(tab.value)}
-              className={`px-4 py-2 rounded-full font-medium transition-all ${
-                activeTab === tab.value
-                  ? "bg-primary text-white scale-105 shadow-lg"
-                  : "bg-gray-100 text-gray-800 hover:bg-primary/20"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
 
-        {/* Rooms */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredRooms.map((room, index) => (
-            <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: index * 0.1 }}
-            className="relative group bg-secondary/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+        <div className="m-5 mt-12 p-3">
+          <div className="my-6">
+            <h1 className="text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex gap-3 mb-8 flex-wrap">
+            {tabs.map(tab => (
+              <button
+                key={tab.value}
+                onClick={() => setActiveTab(tab.value)}
+                className={`px-4 py-2 rounded-full font-medium transition-all ${
+                  activeTab === tab.value
+                    ? "bg-primary text-white scale-105 shadow-lg"
+                    : "bg-gray-100 text-gray-800 hover:bg-primary/20"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Rooms */}
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            <div className="relative w-full h-64 overflow-hidden">
-              <Image
-                src={room.img}
-                alt={room.name}
-                fill
-                className="object-cover transition-all duration-500 group-hover:blur-sm"
-              />
-          
-              {/* Overlay content */}
-              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-4 text-center">
-                <p className="text-sm mb-2">{room.bed}</p>
-                <p className="text-sm mb-2">Available: {room.availability} rooms</p>
-                <p className="text-lg font-bold">{room.price} / night</p>
-              </div>
-            </div>
-          
-            <div className="p-4">
-              <h2 className="text-lg font-semibold text-gray-800">{room.name}</h2>
-            </div>
+            {filteredRooms.map((room, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: index * 0.1 }}
+                className="relative group bg-secondary/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                onClick={() => openModal(room)}
+              >
+                <div className="relative w-full h-64 overflow-hidden">
+                  <Image
+                    src={room.img}
+                    alt={room.name}
+                    fill
+                    className="object-cover transition-all duration-500 group-hover:blur-sm"
+                  />
+              
+                  {/* Overlay content */}
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-4 text-center">
+                    <p className="text-sm mb-2">{room.bed}</p>
+                    <p className="text-sm mb-2">Available: {room.availability} rooms</p>
+                    <p className="text-lg font-bold">{room.price} / night</p>
+                  </div>
+                </div>
+              
+                <div className="p-4">
+                  <h2 className="text-lg font-semibold text-gray-800">{room.name}</h2>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
-          
-          ))}
-        </motion.div>
+        </div>
 
-      </div>
+        {/* Room Details Modal */}
+        <AnimatePresence>
+          {isModalOpen && selectedRoom && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+              onClick={closeModal}
+            >
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ type: "spring", damping: 25 }}
+                className="relative bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-gray-100 transition-colors"
+                >
+                  <FiX size={24} />
+                </button>
 
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Image Gallery */}
+                  <div className="relative h-64 lg:h-full">
+                    <Image
+                      src={selectedRoom.img}
+                      alt={selectedRoom.name}
+                      fill
+                      className="object-cover rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none"
+                    />
+                  </div>
 
-      <section className="max-w-4xl mx-auto py-12">
-        <h2 className="text-4xl font-bold mb-8 text-center text-primary">Why Choose HoliStay?</h2>
+                  {/* Room Details */}
+                  <div className="p-6">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2">{selectedRoom.name}</h2>
+                    <p className="text-primary text-xl font-semibold mb-4">{selectedRoom.price} / night</p>
+                    
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                        {selectedRoom.bed}
+                      </span>
+                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                        {selectedRoom.availability} rooms available
+                      </span>
+                    </div>
 
-        <div className="flex flex-col gap-3">
+                    <p className="text-gray-600 mb-6">{selectedRoom.description}</p>
+
+                    <div className="mb-6">
+                      <h3 className="font-semibold text-lg mb-3">Facilities</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        {facilities.slice(0, 6).map((facility, index) => (
+                          <div key={index} className="flex items-center gap-2">
+                            <div className="text-primary">{facility.icon}</div>
+                            <span className="text-gray-700">{facility.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                      <a href="/booking"><button className="flex-1 bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors font-medium">
+                        Book Now
+                      </button></a>
+                      <a href="/contact"><button className="flex-1 border border-primary text-primary py-3 px-6 rounded-lg hover:bg-primary/10 transition-colors font-medium">
+                        Contact Us
+                      </button></a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+      </motion.section>
+
+      
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.2,
+              delayChildren: 0.2
+            }
+          }
+        }}
+        className="max-w-4xl mx-auto py-12"
+      >
+
+        
+      <motion.h2 variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+          }}
+          className="text-4xl font-bold mb-8 text-center text-primary" >
+          Why Choose HoliStay?
+      </motion.h2>
+
+          <div className="flex flex-col gap-3">
           {features.map((feature, index) => (
             <motion.div
               key={index}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 }
+              }}
               className="m-4 lg:w-full"
-              style={{ marginLeft: `${(index + 1) * 10}px` }}
-              whileHover={{ scaleX: 0.95 }} // Shrink on hover
-              transition={{ type: "spring", stiffness: 200 }} //  Smooth transition
+              whileHover={{ scaleX: 0.95 }}
+              transition={{ type: "spring", stiffness: 200 }}
             >
               <div className={`${feature.bg} p-6 rounded-full shadow-md flex items-center gap-4`}>
                 {feature.icon}
@@ -355,8 +493,8 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-      </section>
-
+        
+      </motion.section>
 
     </div>    
   );
