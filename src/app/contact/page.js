@@ -182,82 +182,187 @@ export default function Contact() {
             </div>
 
             {/* Google Map */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden h-96">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.7985117576865!2d79.8527554153261!3d6.921682495003654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2596d3cb8fe07%3A0x2b0ae6b5d5fd1f1d!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                title="Google Map"
-              ></iframe>
-            </div>
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden h-96">
+          <iframe
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyD54bF873M1u-qCLRVNkkyy3ELRUmDMxn0&q=6.9157525020652875, 79.87747317809244`}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            title="Holi Stay, Colombo 08"
+          ></iframe>
+        </div>
           </motion.div>
         </div>
 
-        {/* FAQs Section */}
-        <motion.div
+        {/* FAQs Section - Improved */}
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5, delay: 0.4 }}
+  className="bg-white rounded-xl shadow-lg overflow-hidden p-8 mt-12"
+>
+  <div className="flex items-center mb-6">
+    <svg className="w-6 h-6 text-secondary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h2 className="text-2xl font-bold text-secondary">Frequently Asked Questions</h2>
+  </div>
+  
+  <div className="space-y-4">
+    {[
+      { 
+        question: 'What services do you offer?', 
+        answer: 'We specialize in luxury travel experiences including hotel bookings, vacation packages, and personalized itineraries. Our services cover everything from transportation to exclusive local experiences.',
+        icon: '🏨'
+      },
+      { 
+        question: 'How can I book a service?', 
+        answer: 'You can book directly through our website, via our mobile app, or by contacting our 24/7 customer service team at +94 76 123 4567.',
+        icon: '📅'
+      },
+      { 
+        question: 'What is your cancellation policy?', 
+        answer: 'Cancellations made 48+ hours before check-in receive full refunds. Within 48 hours, we offer 50% refund or rescheduling. No-shows are non-refundable.',
+        icon: '🔄'
+      },
+      { 
+        question: 'Do you offer group discounts?', 
+        answer: 'Yes! Groups of 5+ rooms receive 10% off, and 10+ rooms get 15% off. Contact our group sales team for custom packages.',
+        icon: '👥'
+      },
+      { 
+        question: 'What payment methods do you accept?', 
+        answer: 'We accept all major credit cards, bank transfers, and mobile payment solutions. Secure payment processing ensures your financial safety.',
+        icon: '💳'
+      },
+    ].map((faq, index) => (
+      <div 
+        key={index} 
+        className={`border rounded-lg overflow-hidden transition-all duration-200 ${activeFAQ === index ? 'border-primary shadow-md' : 'border-gray-200'}`}
+      >
+        <motion.button
+          onClick={() => toggleFAQ(index)}
+          className="w-full text-left flex items-center justify-between p-4 hover:bg-gray-50 transition-colors duration-150"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden p-8 mt-12"
+          transition={{ duration: 0.3 }}
         >
-          <h2 className="text-2xl font-bold text-secondary mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {[
-              { question: 'What services do you offer?', answer: 'We offer a range of services including travel bookings, hotel reservations, and curated vacation packages.' },
-              { question: 'How can I book a service?', answer: 'You can easily book services through our website or by contacting our support team.' },
-              { question: 'What is your cancellation policy?', answer: 'We offer flexible cancellation policies depending on the type of service booked.' },
-            ].map((faq, index) => (
-              <div key={index}>
-                <motion.button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full text-left font-semibold text-gray-800 py-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {faq.question}
-                </motion.button>
-                {activeFAQ === index && (
-                  <motion.div
-                    initial={{ height: 0 }}
-                    animate={{ height: 'auto' }}
-                    transition={{ duration: 0.3 }}
-                    className="pl-4 text-gray-600"
-                  >
-                    <p>{faq.answer}</p>
-                  </motion.div>
-                )}
-              </div>
-            ))}
+          <div className="flex items-center">
+            <span className="text-xl mr-3">{faq.icon}</span>
+            <span className="font-semibold text-gray-800">{faq.question}</span>
           </div>
-        </motion.div>
+          <svg 
+            className={`w-5 h-5 text-primary transform transition-transform duration-200 ${activeFAQ === index ? 'rotate-180' : ''}`}
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.button>
+        
+        {activeFAQ === index && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="px-4 pb-4"
+          >
+            <div className="pl-9 text-gray-600 border-t pt-3 border-gray-100">
+              <p>{faq.answer}</p>
+              {index === 2 && ( // Additional info for cancellation policy
+                <button className="mt-2 text-sm text-primary hover:underline">
+                  View full policy details
+                </button>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </div>
+    ))}
+  </div>
+</motion.div>
 
-        {/* Office Hours Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden p-8 mt-12"
+{/* Office Hours Section - Improved */}
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5, delay: 0.6 }}
+  className="bg-white rounded-xl shadow-lg overflow-hidden p-8 mt-12"
+>
+  <div className="flex items-center mb-6">
+    <svg className="w-6 h-6 text-secondary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h2 className="text-2xl font-bold text-secondary">Our Office Hours</h2>
+  </div>
+  
+  <div className="space-y-3">
+    {[
+      { day: 'Monday - Friday', hours: '9:00 AM - 6:00 PM', status: 'open' },
+      { day: 'Saturday, Sunday', hours: '10:00 AM - 4:00 PM', status: 'open' },
+      { day: 'Public Holidays', hours: 'Varies - Check with us', status: 'limited' },
+    ].map((item, index) => {
+      // Get current day and time
+      const now = new Date();
+      const currentDay = now.toLocaleString('en-US', { weekday: 'long' });
+      const currentHour = now.getHours();
+      const isToday = 
+        (item.day.includes(currentDay) || 
+        (item.day === 'Public Holidays' && /* holiday logic */ false))
+      
+      const isOpenNow = isToday && 
+        (item.status === 'open' || item.status === 'limited') &&
+        (currentHour >= (item.day === 'Saturday' ? 10 : 9) && 
+         currentHour < (item.day === 'Saturday' ? 16 : 18));
+      
+      return (
+        <div 
+          key={index} 
+          className={`flex justify-between items-center p-3 rounded-lg transition-colors duration-150 ${
+            isToday ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-gray-50'
+          }`}
         >
-          <h2 className="text-2xl font-bold text-secondary mb-6">Our Office Hours</h2>
-          <div className="space-y-4">
-            <div className="flex justify-between text-gray-800">
-              <span>Monday - Friday:</span>
-              <span>9:00 AM - 6:00 PM</span>
-            </div>
-            <div className="flex justify-between text-gray-800">
-              <span>Saturday:</span>
-              <span>10:00 AM - 4:00 PM</span>
-            </div>
-            <div className="flex justify-between text-gray-800">
-              <span>Sunday:</span>
-              <span>Closed</span>
-            </div>
+          <div className="flex items-center">
+            <span className={`w-2 h-2 rounded-full mr-3 ${
+              item.status === 'open' ? 'bg-green-500' : 
+              item.status === 'closed' ? 'bg-red-500' : 'bg-yellow-500'
+            }`}></span>
+            <span className="font-medium text-gray-800">{item.day}</span>
           </div>
-        </motion.div>
+          <div className="flex items-center">
+            <span className={`text-gray-600 mr-2 ${
+              isOpenNow ? 'text-green-600 font-medium' : ''
+            }`}>
+              {item.hours}
+            </span>
+            {isOpenNow && (
+              <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                Open Now
+              </span>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+  
+  <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+    <div className="flex">
+      <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div>
+        <p className="text-sm text-blue-800">
+          <strong>24/7 Support:</strong> While our office has specific hours, our customer support team is available round the clock at +94 76 123 4567 for urgent matters.
+        </p>
+      </div>
+    </div>
+  </div>
+</motion.div>
 
       </div>
 
