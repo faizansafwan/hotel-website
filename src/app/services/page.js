@@ -62,19 +62,33 @@ export default function Services() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative w-full h-[60vh]">
-        <Image
-          src={thumbnail}
-          alt="Services Thumbnail"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h1 className="text-white text-4xl font-bold">Our Services</h1>
-          <p className="absolute bottom-20 text-white text-xl">From Comfort to Luxury, Every Moment is Perfected for You</p>
-        </div>
-      </div>
+<div className="relative w-full h-[60vh] min-h-[400px]">
+  <Image
+    src={thumbnail}
+    alt="Services Thumbnail"
+    fill
+    className="object-cover"
+    priority
+  />
+  <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center">
+    <motion.h1 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6"
+    >
+      Our Services
+    </motion.h1>
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="text-white text-lg sm:text-xl md:text-2xl max-w-2xl"
+    >
+      From Comfort to Luxury, Every Moment is Perfected for You
+    </motion.p>
+  </div>
+</div>
 
       {/* Our Services */}
       <motion.div
