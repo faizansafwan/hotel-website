@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <div className="p-3 bg-white shadow-md">
       <nav className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ">
           {/* Logo */}
           <div>
             <Link href="/" className={`text-2xl font-bold ${pathname === "/" ? "text-primary" : ""}`}>
