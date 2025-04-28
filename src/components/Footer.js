@@ -16,7 +16,7 @@ export default function Footer() {
           <p className="mb-6">
             Book your stay at Holi Stay today and discover the perfect blend of comfort, luxury, and natural beauty.
           </p>
-          <a href="http:/booking"><motion.button 
+          <a href="/booking"><motion.button 
             whileHover={{ scale: 1.05 }}
             className="group bg-primary text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition-all duration-300"
           >
