@@ -16,7 +16,7 @@ export default function Footer() {
           <p className="mb-6">
             Book your stay at Holi Stay today and discover the perfect blend of comfort, luxury, and natural beauty.
           </p>
-          <motion.button
+          <a href="http:/booking"><motion.button 
             whileHover={{ scale: 1.05 }}
             className="group bg-primary text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 transition-all duration-300"
           >
@@ -26,7 +26,7 @@ export default function Footer() {
             >
               →
             </motion.span>
-          </motion.button>
+          </motion.button></a>
         </div>
 
         {/* Contact Info */}
@@ -52,10 +52,12 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-semibold mb-4 text-muted">Quick Links</h3>
           <ul className="space-y-2">
-            {["Home", "About Us", "Services", "Contact", "Privacy Policy", "Terms of Service"].map((link, index) => (
+            {[{name:"Home", href: "/"}, {name: "About Us", href: "/about"}, {name:"Services", href:"/services"}, 
+            {name:"Contact", href: "/contact"}, {name: "Privacy Policy", href: "privacy"}, 
+            {name:"Terms of Service", href: "/terms"} ].map((link, index) => (
               <li key={index}>
-                <Link href="#" className="hover:text-primary transition-colors duration-300">
-                  {link}
+                <Link href={link.href} className="hover:text-primary transition-colors duration-300">
+                  {link.name}
                 </Link>
               </li>
             ))}
