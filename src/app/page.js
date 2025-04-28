@@ -5,7 +5,7 @@ import thumbnail from "../../public/images/thumbnail.png";
 import skyline1 from "../../public/images/Skyline-Suite1.jpg";
 import skyline2 from "../../public/images/skyline-suite2.jpg";
 import skyline3 from "../../public/images/skyline-suite3.jpg";
-import cozyCabin1 from "../../public/images/Cozy-Cabin1.png";
+import cozyCabin1 from "../../public/images/Cozy-cabin1.png";
 import cozyCabin2 from "../../public/images/cozy-cabin2.jpg";
 import cozyCabin3 from "../../public/images/cozy-cabin3.jpeg";
 import cozyCabin4 from "../../public/images/cozy-cabin4.jpg";
