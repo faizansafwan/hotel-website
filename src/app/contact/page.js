@@ -149,7 +149,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Address</h3>
-                    <p className="text-gray-600">123 Luxury Street, Colombo 01, Sri Lanka</p>
+                    <p className="text-gray-600">Baseline Rd, Colombo 08, Sri Lanka</p>
                   </div>
                 </div>
 
@@ -174,7 +174,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-800">Email</h3>
-                    <p className="text-gray-600">info@holistay.com</p>
+                    <p className="text-gray-600">info@holistay.lk</p>
                     <p className="text-gray-600">reservations@holistay.com</p>
                   </div>
                 </div>
