@@ -250,7 +250,7 @@ export default function Home() {
 
       {/* Facilities Section */}
       <motion.div
-        className="p-6 bg-secondary"
+        
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -267,6 +267,7 @@ export default function Home() {
             },
           },
         }}
+        className="mx-5 mt-12 p-3 w-full bg-secondary"
       >
         {/* mapped facilities */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
@@ -290,7 +291,7 @@ export default function Home() {
       <motion.section 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.1 }}
         variants={{
           hidden: { opacity: 0, y: 50 },
           visible: {
@@ -302,13 +303,13 @@ export default function Home() {
             }
           }
         }}
-        className="m-5 mt-12 p-3"
+        className="mx-5 mt-12 p-3 w-full"
       >
 
 
-        <div className="m-5 mt-12 p-3">
+        <div className="mx-5 mt-12 p-3 w-full">
           <div className="my-6">
-            <h1 className="text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
           </div>
 
           {/* Tabs */}
@@ -331,7 +332,7 @@ export default function Home() {
           {/* Rooms */}
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[300px]"
           >
             {filteredRooms.map((room, index) => (
               <motion.div
@@ -465,7 +466,7 @@ export default function Home() {
         className="max-w-4xl mx-auto py-12"
       >
 
-        
+      {/* why choose us section */}
       <motion.h2 variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0 }
