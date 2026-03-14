@@ -306,7 +306,7 @@ export default function Home() {
       >
 
 
-        <div className="m-5 mt-12 p-3">
+        {/* <div className="m-5 mt-12 p-3"> */}
           <div className="my-6">
             <h1 className="text-4xl font-bold"><strong className="text-primary">Discover</strong> HoliStay</h1>
           </div>
@@ -337,8 +337,9 @@ export default function Home() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="relative group bg-secondary/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                 onClick={() => openModal(room)}
               >
@@ -364,7 +365,7 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        {/* </div> */}
 
         {/* Room Details Modal */}
         <AnimatePresence>
